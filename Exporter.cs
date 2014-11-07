@@ -33,8 +33,7 @@ namespace SMART_Table_Activty_Exporter
                 if (fileOpener.SafeFileName.EndsWith(".tableContent"))
                 {
                     contentFilePath = fileOpener.FileName;
-                    string manifestText = TableTools.GetManifestText(contentFilePath);
-                    List<string> activityList = TableTools.GetActivitiesFromManifest(manifestText);
+                    List<string> activityList = TableTools.GetActivitiesFromContentFile(contentFilePath);
                     for (int i = 0; i < activityList.Count; i++)
                     {
                         activityBox.Items.Add(activityList[i]);
@@ -58,10 +57,23 @@ namespace SMART_Table_Activty_Exporter
                 MessageBox.Show("Please select a valid activity!");
                 return;
             }
+            string activityId = (string) activityBox.Items[activityBox.SelectedIndex];
             folderBrowser.Description = "Select the export location for the " + activityBox.Items[activityBox.SelectedIndex] + " activity.";
             if (folderBrowser.ShowDialog() == DialogResult.OK)
             {
-                TableTools.ExtractActivityDirectory((string) activityBox.Items[activityBox.SelectedIndex], contentFilePath, folderBrowser.SelectedPath);
+                if (Directory.Exists(folderBrowser.SelectedPath))
+                {
+                    DialogResult dialog = MessageBox.Show("This will overwrite your existing export, continue?", "Folder already exists!", MessageBoxButtons.OKCancel);
+                    if (dialog == DialogResult.OK)
+                    {
+                        Directory.Delete(folderBrowser.SelectedPath + "/" + activityId, true);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                TableTools.ExtractActivityDirectory(activityId, contentFilePath, folderBrowser.SelectedPath);
                 MessageBox.Show("Exported successfully!");
                 this.Close();
             }

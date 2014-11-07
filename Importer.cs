@@ -69,7 +69,8 @@ namespace SMART_Table_Activty_Exporter
             }
             catch (Exception exception)
             {
-
+                Program.HandleError(exception);
+                return;
             }
             // import
             using (ZipFile zipDest = zip)

@@ -64,6 +64,36 @@ namespace SMART_Table_Activty_Exporter
             return activities;
         }
 
+        public static List<string> GetActivitiesFromContentFile(string path)
+        {
+            List<string> activities = new List<string>();
+            string text = GetManifestText(path);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(text);
+            string jsonText = JsonConvert.SerializeXmlNode(doc);
+            JObject manifest = (JObject)JObject.Parse(jsonText)["manifest"];
+            JObject orgs = (JObject)manifest["organizations"];
+            for (int i = 0; i < orgs.Count; i++)
+            {
+                JObject org = (JObject)orgs["organization"];
+                if (org["item"].GetType().ToString().Equals("Newtonsoft.Json.Linq.JArray"))
+                {
+                    JArray items = (JArray)org["item"];
+                    for (int i2 = 0; i2 < items.Count; i2++)
+                    {
+                        JObject item = (JObject)items[i2];
+                        activities.Add((string)item["title"]);
+                    }
+                }
+                else
+                {
+                    JObject item = (JObject)org["item"];
+                    activities.Add((string)item["title"]);
+                }
+            }
+            return activities;
+        }
+
         public static string GetResourceXmlForActivity(string text, string name){
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(text);

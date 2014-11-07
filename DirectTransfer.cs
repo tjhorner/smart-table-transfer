@@ -29,8 +29,7 @@ namespace SMART_Table_Activty_Exporter
                 if (fileOpener.SafeFileName.EndsWith(".tableContent"))
                 {
                     sourceContentFilePath = fileOpener.FileName;
-                    string manifestText = TableTools.GetManifestText(sourceContentFilePath);
-                    List<string> activityList = TableTools.GetActivitiesFromManifest(manifestText);
+                    List<string> activityList = TableTools.GetActivitiesFromContentFile(sourceContentFilePath);
                     for (int i = 0; i < activityList.Count; i++)
                     {
                         activityBox.Items.Add(activityList[i]);
@@ -64,7 +63,11 @@ namespace SMART_Table_Activty_Exporter
                     {
                         Directory.Delete(tempDir + "/" + activityId, true);
                     }
-                    catch (Exception exception) { }
+                    catch (Exception exception)
+                    {
+                        Program.HandleError(exception);
+                        return;
+                    }
                     TableTools.ExtractActivityDirectory(activityId, sourceContentFilePath, tempDir);
                     string tempActivityDir = tempDir + "/" + activityId;
                     ZipFile zip = ZipFile.Read(destinationContentFilePath);
@@ -81,7 +84,7 @@ namespace SMART_Table_Activty_Exporter
                     }
                     catch (Exception exception)
                     {
-                        MessageBox.Show("Error: " + exception.Message + "\nAborting.");
+                        Program.HandleError(exception);
                         return;
                     }
                     // import
@@ -89,11 +92,11 @@ namespace SMART_Table_Activty_Exporter
                     {
                         zipDest.AddFiles((System.IO.Directory.EnumerateFiles(tempActivityDir)), false, TableTools.GetActivityName(tempActivityDir));
                         zipDest.Save();
+                        // cleanup!
+                        Directory.Delete(tempDir + "/" + activityId, true);
                         MessageBox.Show("Transferred successfully!");
                         this.Close();
                     }
-                    // cleanup!
-                    Directory.Delete(tempDir + "/" + activityId, true);
                 }
                 else
                 {

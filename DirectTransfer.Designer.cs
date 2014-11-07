@@ -42,7 +42,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(308, 10);
+            this.label3.Location = new System.Drawing.Point(307, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 30);
             this.label3.TabIndex = 11;
@@ -51,7 +51,7 @@
             // exportButton
             // 
             this.exportButton.Enabled = false;
-            this.exportButton.Location = new System.Drawing.Point(280, 43);
+            this.exportButton.Location = new System.Drawing.Point(279, 39);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(128, 218);
             this.exportButton.TabIndex = 10;
@@ -63,7 +63,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F);
-            this.label2.Location = new System.Drawing.Point(169, 110);
+            this.label2.Location = new System.Drawing.Point(168, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 30);
             this.label2.TabIndex = 9;
@@ -73,7 +73,7 @@
             // 
             this.activityBox.Enabled = false;
             this.activityBox.FormattingEnabled = true;
-            this.activityBox.Location = new System.Drawing.Point(147, 143);
+            this.activityBox.Location = new System.Drawing.Point(146, 139);
             this.activityBox.MaxDropDownItems = 50;
             this.activityBox.Name = "activityBox";
             this.activityBox.Size = new System.Drawing.Size(121, 21);
@@ -84,7 +84,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F);
-            this.label1.Location = new System.Drawing.Point(35, 10);
+            this.label1.Location = new System.Drawing.Point(34, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 30);
             this.label1.TabIndex = 7;
@@ -92,7 +92,7 @@
             // 
             // pickFileButton
             // 
-            this.pickFileButton.Location = new System.Drawing.Point(13, 43);
+            this.pickFileButton.Location = new System.Drawing.Point(12, 39);
             this.pickFileButton.Name = "pickFileButton";
             this.pickFileButton.Size = new System.Drawing.Size(128, 218);
             this.pickFileButton.TabIndex = 6;

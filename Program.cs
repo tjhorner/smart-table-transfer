@@ -20,5 +20,10 @@ namespace SMART_Table_Activty_Exporter
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
         }
+
+        public static void HandleError(Exception e)
+        {
+            System.Windows.Forms.MessageBox.Show("Error! Message: " + e.Message);
+        }
     }
 }
